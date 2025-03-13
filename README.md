@@ -9,24 +9,18 @@ A Model Context Protocol (MCP) tool for retrieving stock market data using the A
 
 ## Setup
 
-1. Clone this repository
-   ```bash
-   git clone https://github.com/yourusername/mcp-stock-market.git
-   cd mcp-stock-market
-   ```
-
-2. Install dependencies
+1. Install dependencies
    ```bash
    npm install
    ```
 
-3. Create a `.env` file based on `.env.example` and add your Alpha Vantage API key
+2. Create a `.env` file based on `.env.example` and add your Alpha Vantage API key
    ```
    ALPHA_VANTAGE_API_KEY=your_api_key_here
    ```
    You can obtain a free API key from [Alpha Vantage](https://www.alphavantage.co/support/#api-key).
 
-4. Build the project
+3. Build the project
    ```bash
    npm run build
    ```
@@ -100,7 +94,6 @@ Volume: 62,630,570
 ### Commands
 
 - `npm run build` - Build the TypeScript code
-- `node build/index.js` - Run the MCP server directly
 
 ## API Usage Notes
 
@@ -117,7 +110,4 @@ If you encounter issues:
 1. Make sure your Alpha Vantage API key is correctly set in the `.env` file
 2. Check that you're using Node.js version 18 or higher
 3. Verify that the path in your MCP client configuration is correct
-
-## License
-
-ISC
+4. Restart your MCP client
