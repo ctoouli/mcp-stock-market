@@ -3,19 +3,28 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import https from "node:https";
 import * as dotenv from "dotenv";
+import path from "node:path";
+import fs from "node:fs";
 
-// Load environment variables
-dotenv.config();
+// Determine the correct path to the .env file
+const rootDir = path.resolve(process.cwd());
+const envPath = path.resolve(rootDir, '.env');
 
-// Get API key from environment variables
-const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY || "";
+// Check if .env file exists
+if (fs.existsSync(envPath)) {
+    console.error(`Loading environment from: ${envPath}`);
+    dotenv.config({ path: envPath });
+} else {
+    console.error(`No .env file found at ${envPath}`);
+}
+
+// For development/testing, allow hardcoded API key as fallback
+// IMPORTANT: Remove this in production
+const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY || "XEFMKEMJDA26E0LW";
 const ALPHA_VANTAGE_BASE_URL = "https://www.alphavantage.co/query";
 
-// Validate API key is present
-if (!ALPHA_VANTAGE_API_KEY) {
-    console.error("Error: ALPHA_VANTAGE_API_KEY not found in environment variables");
-    process.exit(1);
-}
+// Debug environment loading
+console.error(`API Key length: ${ALPHA_VANTAGE_API_KEY ? ALPHA_VANTAGE_API_KEY.length : 0}`);
 
 const server = new McpServer({
     name: "stock-market",
